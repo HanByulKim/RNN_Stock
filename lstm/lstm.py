@@ -108,7 +108,7 @@ file.write("Actual output: {} \n".format(y_test.shape))
 print ("Prediction data:")
 print (prediction_data)
 file.write("Predction data : ")
-file.write(prediction_data)
+file.write(str(prediction_data))
 file.write("\n")
  
  
@@ -116,7 +116,7 @@ print ("Actual data : ")
 x_test = scaler_x.inverse_transform (np. array (x_test). reshape ((len( x_test), len(cols))))
 print (x_test)
 file.write("Actual data : ")
-file.write(x_test)
+file.write(str(x_test))
 file.write("\n")
  
 plt.plot(pred1, label="predictions")

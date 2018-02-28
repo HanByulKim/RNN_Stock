@@ -1,0 +1,5 @@
+Inputs: (None, 5, 1) 
+Outputs: (None, 1) 
+Actual input: (248, 5, 1) 
+Actual output: (248, 1) 
+Predction data : 
