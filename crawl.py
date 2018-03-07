@@ -12,7 +12,7 @@ print("PSYCOPG2 VERSION : " + pg2.__version__)
 
 conn = None
 
-stockCode = '005930' # Samsung Electronics
+stockCode = env.scode # Stock Code
 
 # Connect database
 try :
@@ -20,7 +20,7 @@ try :
     print("PSYCOPG2 : DB connect ok")
 
     cur = conn.cursor()
-    cur.execute("CREATE TABLE samsung (id INTEGER PRIMARY KEY, date DATE, close INT, variation INT, open INT, high INT, low INT, volume INT)")
+    cur.execute("CREATE TABLE " + env.sname + " (id INTEGER PRIMARY KEY, date DATE, close INT, variation INT, open INT, high INT, low INT, volume INT)")
 
 except pg2.DatabaseError as e:
     if conn:
@@ -93,7 +93,7 @@ for page in range(1, dayPriceMaxPageNum + 1):
             id_cnt = id_cnt + 1
 
             #cur.execute("INSERT INTO samsung VALUES(" + str(id_num) + "," + date_t + "," + closingPrice + "," + str(printVariation) + "," + openingPrice + "," + highestPrice + "," + lowestPrice + "," + volume + ")")
-            cur.execute("""INSERT INTO samsung (id, date, close, variation, open, high, low, volume) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);""", (str(id_cnt),date_t,closingPrice,str(printVariation),openingPrice,highestPrice,lowestPrice,volume))
+            cur.execute("""INSERT INTO """ + env.sname + """ (id, date, close, variation, open, high, low, volume) VALUES (%s,%s,%s,%s,%s,%s,%s,%s);""", (str(id_cnt),date_t,closingPrice,str(printVariation),openingPrice,highestPrice,lowestPrice,volume))
 
             print("날짜: " + day, end=" ")
             print("종가: " + closingPrice, end=" ")

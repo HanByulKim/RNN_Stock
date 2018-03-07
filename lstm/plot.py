@@ -8,17 +8,17 @@ import datetime
 
 def candle(conn, size):
     cur = conn.cursor()
-    cur.execute("""SELECT open FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT open FROM """ + env.sname + """ ORDER BY id DESC""")
     open = np.array(cur.fetchall())[:,0]
-    cur.execute("""SELECT high FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT high FROM """ + env.sname + """ ORDER BY id DESC""")
     high = np.array(cur.fetchall())[:,0]
-    cur.execute("""SELECT low FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT low FROM """ + env.sname + """ ORDER BY id DESC""")
     low = np.array(cur.fetchall())[:,0]
-    cur.execute("""SELECT close FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT close FROM """ + env.sname + """ ORDER BY id DESC""")
     close = np.array(cur.fetchall())[:,0]
-    cur.execute("""SELECT date FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT date FROM """ + env.sname + """ ORDER BY id DESC""")
     date = np.array(cur.fetchall())[:,0]
-    cur.execute("""SELECT volume FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT volume FROM """ + env.sname + """ ORDER BY id DESC""")
     volume = np.array(cur.fetchall())[:,0]
 
     day_list = []
@@ -37,10 +37,10 @@ def candle(conn, size):
 
     matfin.candlestick2_ohlc(ax, np.ndarray.tolist(open[len(date)-size:]), np.ndarray.tolist(high[len(date)-size:]), np.ndarray.tolist(low[len(date)-size:]), np.ndarray.tolist(close[len(date)-size:]), width=0.5, colorup='r', colordown='b')
 
-    plt.title('Samsung Electronics ' + str(size) + ' Days')
+    plt.title(env.sname + ' ' + str(size) + ' Days')
     plt.show()
     plt.gcf().clear()
-    cur.execute("""SELECT * FROM samsung ORDER BY id DESC""")
+    cur.execute("""SELECT * FROM """ + env.sname + """ ORDER BY id DESC""")
     all = np.array(cur.fetchall())[:,:]
 
     return all
